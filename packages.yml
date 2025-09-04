@@ -1,0 +1,6 @@
+packages:
+  - package: dbt-labs/dbt_utils
+    version: [">=1.3.0"]
+  - package: dbt-labs/audit_helper
+    version: [">=0.12.0"]
+  - local: "{{ env_var('DEVBT_PATH_TO_OUTER_PROJECT', '..') }}"

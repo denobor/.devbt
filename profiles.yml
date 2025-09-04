@@ -1,0 +1,21 @@
+devbt:
+  target: dev
+  outputs:
+    dev:
+      host: "{{ env_var('DATABRICKS_SERVER_HOSTNAME') }}"
+      http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+      catalog: "{{ env_var('DEVBT_DEV_CATALOG') }}"
+      schema: "{{ env_var('DEVBT_DEV_SCHEMA', 'devbt') }}"
+      threads: 24
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      type: databricks
+
+    # compile only, to defer builds except models in development
+    prod_shadow:
+      host: "{{ env_var('DATABRICKS_SERVER_HOSTNAME') }}"
+      http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+      catalog: "{{ env_var('DEVBT_PROD_CATALOG') }}"
+      schema:  "{{ env_var('DEVBT_PROD_SCHEMA') }}"
+      threads: 8
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      type: databricks

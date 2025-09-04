@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: devbt_test_table
+    description: Persistent table for unit tests, or etc.

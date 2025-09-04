@@ -1,0 +1,18 @@
+[project]
+name = "devbt"
+version = "0.1.0"
+description = "A small dbt 'dev overlay' project to enhance local development on existing dbt probjects."
+readme = "README.md"
+requires-python = "~=3.11.0"
+dependencies = [
+    "dbt-core~=1.10",
+    "dbt-databricks~=1.10",
+]
+
+[dependency-groups]
+dev = [
+    "shandy-sqlfmt[jinjafmt]"
+]
+
+[tool.sqlfmt]
+exclude=["target/**/*", "dbt_packages/**/*", ".venv/**/*"]

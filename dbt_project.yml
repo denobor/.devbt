@@ -1,0 +1,39 @@
+name: 'devbt'
+version: '1.0.0'
+
+profile: 'devbt'
+
+model-paths: ["src/models"]
+analysis-paths: ["src/analyses"]
+test-paths: ["src/tests"]
+seed-paths: ["src/seeds"]
+macro-paths: ["src/macros"]
+snapshot-paths: ["src/snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  # prod_shadow - you wont run the prod models, but compile for defer states
+  +catalog: "{{ env_var('DEVBT_PROD_CATALOG') if target.name == 'prod_shadow' else env_var('DEVBT_DEV_CATALOG') }}"
+  +schema:  "{{ env_var('DEVBT_PROD_SCHEMA')  if target.name == 'prod_shadow' else env_var('DEVBT_DEV_SCHEMA') }}"
+
+  # overlay project
+  devbt:
+    # catalog/schema: do not set here, unless you override macro generate_schema_name
+    +enabled: "{{ target.name != 'prod_shadow' }}"
+    example:
+      +materialized: table
+    test_tables:
+      +materialized: table
+
+data_tests:
+  +catalog: "{{ env_var('DEVBT_DEV_CATALOG') }}"
+  +schema: "{{ env_var('DEVBT_DEV_SCHEMA') }}"
+  +store_failures: true
+  +severity: warn
+
+flags:
+  send_anonymous_usage_stats: false
+  use_materialization_v2: true
