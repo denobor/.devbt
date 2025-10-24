@@ -1,10 +1,10 @@
 # DEVBT
->This 'devbt' is a dbt dev overlay project, a small active project that layers on top of your team repo to provide local macros, env bridging, and safe catalog/schema overrides without touching the team’s dbt_project.yml or profiles.yml.
+This 'devbt' is a dbt dev overlay project, a small active project that layers on top of your team repo to provide local macros, env bridging, and safe catalog/schema overrides without touching the team’s dbt_project.yml or profiles.yml.
 
->* git clone this repo into your dbt project repo
->* the ./devbt subdirectory will be ignored by the outer repo
->* install 'just' task runner to take advantage of the prepared development recipes
->* this repo is .gitignored, is not added to the outer project repo
+* git clone this repo into your dbt project repo
+* the ./devbt subdirectory will be ignored by the outer repo
+* install 'just' task runner to take advantage of the prepared development recipes
+* this repo is .gitignored, is not added to the outer project repo
 
 **Outer Project** - the dbt project you are making development changes on.
 **Overlay Project** - this dbt project in subfolder `./devbt` which overlays the development project.
@@ -88,7 +88,7 @@ just run --target dev --defer --state target --favor-state --vars "process_date:
 ```
 
 ## RUNNING TESTS
-TODO: using justfile to pass catalog env vars in
+TODO: I'm using justfile to pass catalog env vars in
 
 ```bash
 just pass uv run dbt test --project-dir . --profiles-dir . --target dev --select test_schema_changes_fcmw --vars "process_date: 2025-08-26"
